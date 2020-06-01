@@ -16,6 +16,9 @@
     "url": "https://github.com/barosanuemailtest/ManagerServer/issues"
   },
   "homepage": "https://github.com/barosanuemailtest/ManagerServer#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3"
+  },
   "dependencies": {}
 }
