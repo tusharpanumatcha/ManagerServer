@@ -1,20 +1,17 @@
-import { Handler } from "./Model";
 import { IncomingMessage, ServerResponse } from "http";
 import { UsersDBAccess } from "../User/UsersDBAccess";
 import { HTTP_METHODS, HTTP_CODES } from "../Shared/Model";
 import { Utils } from "./Utils";
+import { BaseRequestHandler } from "./BaseRequestHandler";
 
 
 
-export class UsersHandler implements Handler {
+export class UsersHandler extends BaseRequestHandler {
 
-    private req: IncomingMessage;
-    private res: ServerResponse;
     private usersDBAccess: UsersDBAccess = new UsersDBAccess();
 
     public constructor(req: IncomingMessage, res: ServerResponse) {
-        this.req = req;
-        this.res = res;
+        super(req, res);
     }
 
 
@@ -36,9 +33,6 @@ export class UsersHandler implements Handler {
         const a = '5';
     }
 
-    private async handleNotFound() {
-        this.res.statusCode = HTTP_CODES.NOT_FOUND;
-        this.res.write('not found');
-    }
+
 
 }
