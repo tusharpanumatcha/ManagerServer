@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { Account, Handler, TokenGenerator } from "./Model";
-import { HTTP_CODES } from "../Shared/Model";
+import { HTTP_CODES, HTTP_METHODS } from "../Shared/Model";
 
 export class LoginHandler implements Handler {
 
@@ -15,6 +15,23 @@ export class LoginHandler implements Handler {
     }
 
     public async handleRequest(): Promise<void> {
+        switch (this.req.method) {
+            case HTTP_METHODS.POST:
+                await this.handlePost();
+                break;
+            default:
+                this.handleNotFound();
+                break;
+        }
+    }
+
+    private async handleNotFound() {
+        this.res.statusCode = HTTP_CODES.NOT_FOUND;
+        this.res.write('not found');
+    }
+
+
+    private async handlePost() {
         try {
             const body = await this.getRequestBody();
             const sessionToken = await this.tokenGenerator.generateToken(body);
@@ -29,10 +46,6 @@ export class LoginHandler implements Handler {
         } catch (error) {
             this.res.write('error: ' + error.message)
         }
-
-
-
-
     }
 
     private async getRequestBody(): Promise<Account> {
