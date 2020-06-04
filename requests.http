@@ -7,4 +7,4 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:8080/users?id=asdz234
+GET http://localhost:8080/users?id3=asd23234

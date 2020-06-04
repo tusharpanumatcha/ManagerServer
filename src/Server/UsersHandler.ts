@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse, STATUS_CODES } from "http";
 import { UsersDBAccess } from "../User/UsersDBAccess";
 import { HTTP_METHODS, HTTP_CODES } from "../Shared/Model";
 import { Utils } from "./Utils";
@@ -29,6 +29,22 @@ export class UsersHandler extends BaseRequestHandler {
 
     private async handleGet() {
         const parsedUrl = Utils.getUrlParameters(this.req.url);
+        if (parsedUrl) {
+            const userId = parsedUrl.query.id
+            if (userId) {
+                const user = await this.usersDBAccess.getUserById(userId as string);
+                if (user) {
+                    this.respondJsonObject(HTTP_CODES.OK, user);
+                } else {
+                    this.handleNotFound();
+                }
+            } else {
+                this.respondBadRequest('userId not present in request');
+            }
+
+        }
+
+
         console.log('queryId:' + parsedUrl?.query.id);
         const a = '5';
     }
