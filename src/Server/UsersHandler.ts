@@ -1,17 +1,20 @@
 import { IncomingMessage, ServerResponse, STATUS_CODES } from "http";
 import { UsersDBAccess } from "../User/UsersDBAccess";
-import { HTTP_METHODS, HTTP_CODES } from "../Shared/Model";
+import { HTTP_METHODS, HTTP_CODES, AccessRight } from "../Shared/Model";
 import { Utils } from "./Utils";
 import { BaseRequestHandler } from "./BaseRequestHandler";
+import { TokenValidator } from "./Model";
 
 
 
 export class UsersHandler extends BaseRequestHandler {
 
     private usersDBAccess: UsersDBAccess = new UsersDBAccess();
+    private tokenValidator: TokenValidator;
 
-    public constructor(req: IncomingMessage, res: ServerResponse) {
+    public constructor(req: IncomingMessage, res: ServerResponse, tokenValidator: TokenValidator) {
         super(req, res);
+        this.tokenValidator = tokenValidator;
     }
 
 
@@ -43,10 +46,21 @@ export class UsersHandler extends BaseRequestHandler {
             }
 
         }
+    }
 
+    public async operationAuthorized(operation: AccessRight): Promise<boolean> {
+        const tokenId = this.req.headers.authorization;
+        if (tokenId) {
+            const tokenRights = await this.tokenValidator.validateToken(tokenId);
+            if (tokenRights.accessRights.includes(operation)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
 
-        console.log('queryId:' + parsedUrl?.query.id);
-        const a = '5';
     }
 
 
