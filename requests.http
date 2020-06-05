@@ -6,6 +6,17 @@ Content-Type: application/json
     "password": "password1"
 }
 ###
-
 GET http://localhost:8080/users?id=asd23234
-Authorization: 2mitcdmja04
+Authorization: zix3fqyqr2
+
+###
+PUT http://localhost:8080/users
+Authorization: 9bi9m7n87c
+Content-Type: application/json
+
+{
+  "age": 45,
+  "email": "some@otheremail.com",
+  "name": "barosanu",dfgd
+  "workingPosition": 3
+}
