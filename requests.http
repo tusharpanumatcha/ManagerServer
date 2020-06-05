@@ -6,6 +6,11 @@ Content-Type: application/json
     "password": "password1"
 }
 ###
+
+DELETE  http://localhost:8080/users?id=asd23234
+Authorization: mf9oxjfeugb
+
+###
 GET http://localhost:8080/users?id=asd23234
 Authorization: zix3fqyqr2
 
