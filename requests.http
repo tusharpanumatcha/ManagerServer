@@ -12,16 +12,16 @@ Authorization: mf9oxjfeugb
 
 ###
 GET http://localhost:8080/users?id=asd23234
-Authorization: zix3fqyqr2
+Authorization: dzrurgklde8
 
 ###
 
-GET http://localhost:8080/users?name=John
-Authorization: hpz6wnimby6
+GET http://localhost:8080/users?name=aro
+Authorization: dzrurgklde8
 
 ###
 PUT http://localhost:8080/users
-Authorization: 9bi9m7n87c
+Authorization: dzrurgklde8
 Content-Type: application/json
 
 {
