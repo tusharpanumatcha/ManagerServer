@@ -28,7 +28,7 @@ export class Server {
 
                 res.end();
             }
-        ).listen(8080);
+        ).listen(9000);
         console.log('server started')
     }
 
