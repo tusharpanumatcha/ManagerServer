@@ -7,8 +7,7 @@ import { UsersHandler } from './UsersHandler';
 export class Server {
 
     private authorizer: Authorizer = new Authorizer();
-    private loginHandler: LoginHandler = new LoginHandler(this.authorizer);
-    private usersHandler: UsersHandler = new UsersHandler(this.authorizer);
+
     public createServer() {
         createServer(
             async (req: IncomingMessage, res: ServerResponse) => {
@@ -18,14 +17,10 @@ export class Server {
 
                 switch (basePath) {
                     case 'login':
-                        this.loginHandler.setRequest(req);
-                        this.loginHandler.setResponse(res);
-                        await this.loginHandler.handleRequest();
+                        await new LoginHandler(req, res, this.authorizer).handleRequest();
                         break;
                     case 'users':
-                        this.usersHandler.setRequest(req);
-                        this.usersHandler.setResponse(res);
-                        await this.usersHandler.handleRequest();
+                        await new UsersHandler(req, res, this.authorizer).handleRequest();
                         break
                     default:
                         break;

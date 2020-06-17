@@ -7,8 +7,8 @@ export class LoginHandler extends BaseRequestHandler {
 
     private tokenGenerator: TokenGenerator
 
-    public constructor(tokenGenerator: TokenGenerator, req?: IncomingMessage, res?: ServerResponse) {
-        super({} as any, {} as any);
+    public constructor(req: IncomingMessage, res: ServerResponse, tokenGenerator: TokenGenerator) {
+        super(req, res);
         this.tokenGenerator = tokenGenerator
     }
 

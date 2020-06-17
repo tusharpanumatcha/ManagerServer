@@ -12,8 +12,8 @@ export class UsersHandler extends BaseRequestHandler {
     private usersDBAccess: UsersDBAccess = new UsersDBAccess();
     private tokenValidator: TokenValidator;
 
-    public constructor(tokenValidator: TokenValidator, req?: IncomingMessage, res?: ServerResponse) {
-        super({} as any, {} as any);
+    public constructor(req: IncomingMessage, res: ServerResponse, tokenValidator: TokenValidator) {
+        super(req, res);
         this.tokenValidator = tokenValidator;
     }
 
