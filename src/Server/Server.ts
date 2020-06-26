@@ -12,7 +12,7 @@ export class Server {
     public createServer() {
         createServer(
             async (req: IncomingMessage, res: ServerResponse) => {
-                console.log('got request from: ' + req.url);
+                console.log(`got request from ${req.headers["user-agent"]} for ${req.url}`);
                 this.addCorsHeader(res);
                 const basePath = Utils.getUrlBasePath(req.url);
 
