@@ -7,7 +7,7 @@
     "strictNullChecks": true,
     "strict": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "",
     "experimentalDecorators": true,
     "target": "ES5"
   }
