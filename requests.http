@@ -1,4 +1,4 @@
-POST http://localhost:8080/login
+POST https://ec2-54-90-66-192.compute-1.amazonaws.com:8080/login
 Content-Type: application/json
 
 {
